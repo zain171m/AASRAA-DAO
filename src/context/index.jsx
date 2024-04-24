@@ -13,6 +13,7 @@ export const StateContextProvider = ({ children }) => {
   const address = useAddress();
   const connect = useMetamask();
 
+
   const publishCampaign = async (form) => {
     try {
       const data = await requestCampaign({
@@ -68,6 +69,8 @@ export const StateContextProvider = ({ children }) => {
     return data;
   }
 
+ 
+
   const getDonations = async (pId) => {
     const donations = await contract.call('getDonors', [pId]);
     const numberOfDonations = donations[0].length;
@@ -84,6 +87,16 @@ export const StateContextProvider = ({ children }) => {
     return parsedDonations;
   }
 
+  const getBalance = async () => {
+    try {
+      const balance = await contract.call('balanceOf', [address]);
+      return ethers.utils.formatEther(balance.toString());
+    } catch (error) {
+      console.error("Error getting balance:", error);
+      return null;
+    }
+  }
+
 
   return (
     <StateContext.Provider
@@ -96,6 +109,7 @@ export const StateContextProvider = ({ children }) => {
         getUserCampaigns,
         donate,
         vote,
+        getBalance,
         getDonations
       }}
     >
