@@ -105,7 +105,6 @@ const CampaignDetails = () => {
               </div>
           </div>
         </div>
-
         { state.approved ? 
          <div className="flex-1">
          <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Fund</h4>   
