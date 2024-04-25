@@ -7,7 +7,7 @@ import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const { contract } = useContract('0x2338f32794A3f6Cb16281040A00Ad0089dEfbd48');
+  const { contract } = useContract('0xC0F183EA8d3374Ef7D37028B4075F49da871d389');
   const { mutateAsync: requestCampaign } = useContractWrite(contract, 'requestCampaign');
 
   const address = useAddress();
@@ -45,7 +45,9 @@ export const StateContextProvider = ({ children }) => {
       amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
       image: campaign.imageUrl,
       pId: i,
-      approved: campaign.approved
+      approved: campaign.approved,
+      yesCount: ethers.utils.formatEther(campaign.yesCount.toString()),
+      noCount: ethers.utils.formatEther(campaign.noCount.toString())
     }));
 
     return parsedCampaings;
@@ -69,6 +71,10 @@ export const StateContextProvider = ({ children }) => {
     return data;
   }
 
+  const dvote = async (pId) => {
+    const data = await contract.call('castVote', [pId, false]);
+    return data;
+  }
  
 
   const getDonations = async (pId) => {
@@ -109,6 +115,7 @@ export const StateContextProvider = ({ children }) => {
         getUserCampaigns,
         donate,
         vote,
+        dvote,
         getBalance,
         getDonations
       }}

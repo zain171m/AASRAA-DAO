@@ -10,7 +10,7 @@ import { logo } from '../assets';
 const CampaignDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { donate, getDonations, contract, address, vote, balanceOf } = useStateContext();
+  const { donate, getDonations, contract, address, vote, dvote } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState('');
@@ -41,6 +41,15 @@ const CampaignDetails = () => {
     setIsLoading(true);
 
     await vote(state.pId); 
+
+    navigate('/')
+    setIsLoading(false);
+  }
+
+  const dhandleVote = async () => {
+    setIsLoading(true);
+
+    await dvote(state.pId); 
 
     navigate('/')
     setIsLoading(false);
@@ -89,21 +98,29 @@ const CampaignDetails = () => {
                 <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{state.description}</p>
               </div>
           </div>
-
+          {state.approved?
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Donators</h4>
+            <div className="mt-[20px] flex flex-col gap-4">
+              {donators.length > 0 ? donators.map((item, index) => (
+                <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
+                  <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
+                  <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p>
+                </div>
+              )) : (
+                <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donators yet. Be the first one!</p>
+              )}
+            </div>
+        </div> :
+        <div> 
+            <p className="my-2 font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">Votes are based on number of ASRA tokens donors hold</p>
+            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Approval Votes</h4>
+            <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{state.yesCount}</p>
 
-              <div className="mt-[20px] flex flex-col gap-4">
-                {donators.length > 0 ? donators.map((item, index) => (
-                  <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
-                    <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
-                    <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p>
-                  </div>
-                )) : (
-                  <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donators yet. Be the first one!</p>
-                )}
-              </div>
-          </div>
+            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Disapproval Votes</h4>
+            <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{state.noCount}</p>
+        </div>
+        }
+          
         </div>
         { state.approved ? 
          <div className="flex-1">
@@ -143,7 +160,7 @@ const CampaignDetails = () => {
 
       <div className="mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
         <p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
-          Vote for campaign approval
+          Vote for campaign approval or dissapproval
         </p>
         <div className="mt-[30px]">
           <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
@@ -156,6 +173,18 @@ const CampaignDetails = () => {
             title="Vote Campaign"
             styles="w-full bg-[#8c6dfd]"
             handleClick={handleVote}
+          />
+
+<div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
+            <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white">Back it because you believe in it.</h4>
+            <p className="mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]">Vote the project to approve it to receive donations</p>
+          </div>
+
+          <CustomButton 
+            btnType="button"
+            title="Vote Campaign"
+            styles="w-full bg-[#8c6dfd]"
+            handleClick={dhandleVote}
           />
         </div>
       </div>
