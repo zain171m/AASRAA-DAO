@@ -1,10 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useStateContext } from '../context';
 import { CustomButton } from './';
 import { logo, menu, search, thirdweb } from '../assets';
 import { navlinks } from '../constants';
+
+
+// Define the DisappearingDiv component
+function DisappearingDiv() {
+  const [showDiv, setShowDiv] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1444) {
+        setShowDiv(false);
+      } else {
+        setShowDiv(true);
+      }
+    };
+
+    // Listen for resize events
+    window.addEventListener('resize', handleResize);
+
+    // Initial check on component mount
+    handleResize();
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return (
+    <div>
+      {showDiv && (
+        <div className="mt-2 ml-8 w-[100px] h-[52px] rounded-full flex justify-end items-center cursor-pointer">
+          <h4 className="relative font-epilogue font-semibold text-[45px] text-white uppercase inline-block">
+            <span className="bg-[#3b88c3] px-2 pt-2 rounded">AASRAA</span>
+          </h4>
+        </div>
+      )}
+    </div>
+  );
+}
+
 
 
 
@@ -27,7 +67,8 @@ const Navbar = () => {
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
-      <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
+      <DisappearingDiv />
+      <div className="mt-1 lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px]">
         <input type="text" placeholder="Search for campaigns" className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none" />
         
         <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
@@ -35,14 +76,8 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="w-[100px] h-[52px] rounded-full flex justify-center items-center cursor-pointer">
-        <h4 className="relative font-epilogue font-semibold text-[45px] text-white uppercase inline-block">
-          <span className="bg-[#3b88c3] px-2 py-1 rounded">AASRAA</span>
-        </h4>
-      </div>
-
       {address? 
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-end gap-4">
       <div className=" font-bold rounded-lg bg-gray-900 text-[18px] text-[#3b88c3] p-2">
         {/* Your balance display logic goes here */}
         {/* Example: */}
