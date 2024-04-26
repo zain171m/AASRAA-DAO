@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <DisplayCampaigns 
-      title="All Campaigns"
+      title="All Approved Campaigns"
       isLoading={isLoading}
       campaigns={campaigns}
     />

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ethers } from 'ethers';
-
 import { useStateContext } from '../context';
 import { CountBox, CustomButton, Loader } from '../components';
 import { calculateBarPercentage, daysLeft } from '../utils';
@@ -165,24 +163,24 @@ const CampaignDetails = () => {
         <div className="mt-[30px]">
           <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
             <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white">Back it because you believe in it.</h4>
-            <p className="mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]">Vote the project to approve it to receive donations</p>
+            <p className="mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]">Vote the campaign to approve it to receive donations</p>
           </div>
 
           <CustomButton 
             btnType="button"
-            title="Vote Campaign"
+            title="Vote for Approval"
             styles="w-full bg-[#8c6dfd]"
             handleClick={handleVote}
           />
 
 <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
-            <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white">Back it because you believe in it.</h4>
-            <p className="mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]">Vote the project to approve it to receive donations</p>
+            <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white">Skeptical about campaign legitimacy? No worries.</h4>
+            <p className="mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]">You can vote for the dissapproval of the campaign</p>
           </div>
 
           <CustomButton 
             btnType="button"
-            title="Vote Campaign"
+            title="Vote for Disapproval"
             styles="w-full bg-[#8c6dfd]"
             handleClick={dhandleVote}
           />

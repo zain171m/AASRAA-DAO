@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
-import { DisplayCampaigns } from '../components';
+import { DisplayUCampaigns } from '../components';
 import { useStateContext } from '../context'
 
-const Profile = () => {
+const Unapproved = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
 
-  const { address, contract, getUserCampaigns } = useStateContext();
+  const { address, contract, getUCampaigns } = useStateContext();
 
   const fetchCampaigns = async () => {
     setIsLoading(true);
-    const data = await getUserCampaigns();
+    const data = await getUCampaigns();
     setCampaigns(data);
     setIsLoading(false);
   }
@@ -21,12 +21,12 @@ const Profile = () => {
   }, [address, contract]);
 
   return (
-    <DisplayCampaigns 
-      title="Your Campaigns"
+    <DisplayUCampaigns 
+      title="All Unapproved Campaigns"
       isLoading={isLoading}
       campaigns={campaigns}
     />
   )
 }
 
-export default Profile
+export default Unapproved

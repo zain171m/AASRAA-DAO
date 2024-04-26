@@ -33,7 +33,7 @@ export const StateContextProvider = ({ children }) => {
     }
   }
 
-  const getCampaigns = async () => {
+  const getAllCampaigns = async () => {
     const campaigns = await contract.call('getCampaigns');
 
     const parsedCampaings = campaigns.map((campaign, i) => ({
@@ -50,11 +50,27 @@ export const StateContextProvider = ({ children }) => {
       noCount: ethers.utils.formatEther(campaign.noCount.toString())
     }));
 
-    return parsedCampaings;
+     return parsedCampaings;
+  }
+
+  const getCampaigns = async () => {
+    const allCampaigns = await getAllCampaigns();
+
+    const filteredCampaigns = allCampaigns.filter((campaign) => campaign.approved === true);
+
+    return filteredCampaigns;
+  }
+
+  const getUCampaigns = async () => {
+    const allCampaigns = await getAllCampaigns();
+
+    const filteredCampaigns = allCampaigns.filter((campaign) => campaign.approved === false);
+
+    return filteredCampaigns;
   }
 
   const getUserCampaigns = async () => {
-    const allCampaigns = await getCampaigns();
+    const allCampaigns = await getAllCampaigns();
 
     const filteredCampaigns = allCampaigns.filter((campaign) => campaign.owner === address);
 
@@ -112,6 +128,7 @@ export const StateContextProvider = ({ children }) => {
         connect,
         requestCampaign: publishCampaign,
         getCampaigns,
+        getUCampaigns,
         getUserCampaigns,
         donate,
         vote,

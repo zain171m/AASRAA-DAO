@@ -36,6 +36,7 @@ const Sidebar = () => {
                   setIsActive(link.name);
                   navigate(link.link);
                 }
+                <p>hihi</p>
               }}
             />
           ))}
