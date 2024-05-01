@@ -7,7 +7,7 @@
     </h1>
 </p>
 
-| AASRAA is a Crowdfunding Decentralized Autonomous Organization which is governed by the donors. Donors are incentivised with AASRAA tokens upon donations. |
+| AASRAA is a Crowdfunding Decentralized Autonomous Organization which is governed by the donors. Donors are incentivised with AASRAA tokens upon donations.AASRAA tokens are primarily used in voting process for the campaigns approval |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 ## Getting Started
