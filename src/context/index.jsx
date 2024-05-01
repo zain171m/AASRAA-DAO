@@ -2,12 +2,13 @@ import React, { useContext, createContext } from 'react';
 
 import { useAddress, useContract, useMetamask, useContractWrite } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
-import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
+import { ChainId, EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
+
 
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const { contract } = useContract('0xC0F183EA8d3374Ef7D37028B4075F49da871d389');
+  const { contract } = useContract('0xC6E864c9816FfD3fcc1C501ECCFB3c83EbD62be1');
   const { mutateAsync: requestCampaign } = useContractWrite(contract, 'requestCampaign');
 
   const address = useAddress();
@@ -91,6 +92,11 @@ export const StateContextProvider = ({ children }) => {
     const data = await contract.call('castVote', [pId, false]);
     return data;
   }
+
+  const voter = async (pId) => {
+    const data = await contract.call('voters', [address, pId]);
+    return data;
+  }
  
 
   const getDonations = async (pId) => {
@@ -134,7 +140,8 @@ export const StateContextProvider = ({ children }) => {
         vote,
         dvote,
         getBalance,
-        getDonations
+        getDonations,
+        voter
       }}
     >
       {children}

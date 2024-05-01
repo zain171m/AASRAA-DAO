@@ -8,7 +8,7 @@ import { logo } from '../assets';
 const CampaignDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { donate, getDonations, contract, address, vote, dvote } = useStateContext();
+  const { donate, getDonations, contract, address, vote, dvote, voter } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState('');
@@ -27,30 +27,51 @@ const CampaignDetails = () => {
   }, [contract, address])
 
   const handleDonate = async () => {
-    setIsLoading(true);
+    if(state.amountCollected < state.target)
+    {
+      setIsLoading(true);
 
-    await donate(state.pId, amount); 
+      await donate(state.pId, amount); 
 
-    navigate('/')
-    setIsLoading(false);
+      navigate('/')
+      setIsLoading(false);
+    }
+    else
+    {
+      alert('Already received enough donations');
+    }
   }
 
   const handleVote = async () => {
-    setIsLoading(true);
+    const voted = await voter(state.pId)
+    if (!voted)
+    {
+      setIsLoading(true);
 
-    await vote(state.pId); 
+      await vote(state.pId); 
 
-    navigate('/')
-    setIsLoading(false);
+      navigate('/')
+      setIsLoading(false);
+    }
+    else{
+      alert('Already voted for the campaign');
+    }
   }
 
   const dhandleVote = async () => {
-    setIsLoading(true);
+    const voted = await voter(state.pId)
+    if (!voted)
+    {
+      setIsLoading(true);
 
-    await dvote(state.pId); 
+      await dvote(state.pId); 
 
-    navigate('/')
-    setIsLoading(false);
+      navigate('/')
+      setIsLoading(false);
+    }
+    else{
+      alert('Already voted for the campaign');
+    }
   }
 
   return (
@@ -131,7 +152,7 @@ const CampaignDetails = () => {
            <div className="mt-[30px]">
              <input 
                type="number"
-               placeholder="ETH 0.1"
+               placeholder="CANTO 0.1"
                step="0.01"
                className="w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]"
                value={amount}
