@@ -11,6 +11,18 @@
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 ## Getting Started
+A User can connect meta mask wallet and start using the app. 
+
+A Fundraiser can request a campaign 
+
+The campaign will not be directly approved for donations to accept donation it must pass a voting step for donation
+
+The donors(AASRAA tokens holder) can vote for the campaign. campaigns are approved when difference of approval and disapproval votes are 10 or above.
+After the campaign approved it can accept donations
+
+Donors can donate Canto's here and receive equal AASRAA tokens in return.(AASRAA tokens are than used to vote for other campaigns)
+ASRA token balance against each address is also displayed on Navbar.
+
 
 Create a project using this example:
 
