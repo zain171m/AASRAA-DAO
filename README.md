@@ -1,7 +1,7 @@
 <p align="center">
     <h1 align="center">
       <picture>
-        <img width="40" alt="Plurality icon." src="https://github.com/zain171m/AASRAA-DAO/blob/main/src/assets/logo.svg">
+        <img width="40" alt="Plurality icon." src="https://github.com/zain171m/AASRAA-DAO/blob/main/src/assets/aasraa.svg">
       </picture>
       AASRAA
     </h1>
