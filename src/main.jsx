@@ -10,9 +10,11 @@ import { CantoTesnet } from "@thirdweb-dev/chains";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const clientId = import.meta.env.VITE_NEXT_PUBLIC_CLIENT_ID.toString();
+
 root.render(
   <ThirdwebProvider activeChain = {CantoTesnet}
-  clientId="ae6e04b6ac48355f0aee070650cd941f"> 
+  clientId={clientId}> 
     <Router>
       <StateContextProvider>
         <App />

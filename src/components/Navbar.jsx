@@ -63,7 +63,7 @@ const Navbar = () => {
       setBalance(userBalance);
     };
     fetchBalance();
-  }, [getBalance]);
+  });
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
