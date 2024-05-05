@@ -16,6 +16,10 @@ AASRAA ( means helper ) is created to help fundraiser and startups. Using a robu
 ## Live App
 https://aasraa-dao.vercel.app/
 
+## AASRAA Smart Contract
+
+https://github.com/zain171m/AASRAA-DAO-Contract
+
 ## How to run the project locally
 
 1. After cloning project directory, you can run:
