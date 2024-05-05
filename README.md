@@ -13,6 +13,9 @@
 ## AASRAA APP
 AASRAA ( means helper ) is created to help fundraiser and startups. Using a robust platform which is governed by the donors where a scammer can not just fill up the platforms with campaigns rather campaigns needs to be approved through a voting process.
 
+## Live App
+https://aasraa-dao.vercel.app/
+
 ## How to run this extension
 
 1. After cloning project directory, you can run:
