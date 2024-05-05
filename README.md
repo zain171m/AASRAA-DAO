@@ -16,7 +16,7 @@ AASRAA ( means helper ) is created to help fundraiser and startups. Using a robu
 ## Live App
 https://aasraa-dao.vercel.app/
 
-## How to run this extension
+## How to run the project locally
 
 1. After cloning project directory, you can run:
 
